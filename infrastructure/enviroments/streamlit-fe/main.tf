@@ -6,17 +6,23 @@ module "setup" {
   source = "../modules/setup"
 }
 
+module "ecr" {
+  source = "../modules/ecr"
+}
+
+module "ecs" {
+  source = "../modules/ecs"
+}
+
+module "iam" {
+  source = "../modules/iam"
+}
+
 #module "app" {
 #  source = "../../modules/app"
 #
 #  environment = var.environment
 #  prefix      = var.prefix
-#}
-
-#module "ecr" {
-#  source = "../../modules/ecr"
-#
-#  prefix = var.prefix
 #}
 
 #module "ecs" {

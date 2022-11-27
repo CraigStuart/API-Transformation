@@ -8,6 +8,11 @@ packages = [{include = "api_transformation"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+boto3 = "^1.26.16"
+python-dotenv = "^0.21.0"
+pandas = "^1.5.2"
+numpy = "^1.23.5"
+pillow = "^9.3.0"
 
 
 [build-system]

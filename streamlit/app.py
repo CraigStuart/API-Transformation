@@ -13,7 +13,8 @@ def run():
 
     add_selectbox = st.sidebar.selectbox(
     "How would you like to submit your text?",
-    ("Online", "Batch"))
+    ("Online"))
+    # ("Online", "Batch"))
 
     st.title("Text find and replace function")
 
