@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from src.config.producer import send_sqs_message
+import json
 
 def run():
 
     from PIL import Image
-    image = Image.open('/assets/deloitte-logo-black.png')
+    image = Image.open(r'./src/assets/deloitte-logo-white.png')
 
-    st.image(image,use_column_width=False)
+    st.image(image, channels="RGB", output_format="auto")
 
     add_selectbox = st.sidebar.selectbox(
     "How would you like to submit your text?",
@@ -18,19 +19,14 @@ def run():
 
     if add_selectbox == 'Online':
 
-        text_body = st.text_input("Raw text", value="", max_chars=None, key=None, type="default", help=None, autocomplete=None,
-                      on_change=None, args=None, kwargs=None, *, placeholder=None, disabled=False,
-                      label_visibility="visible")
+        text_body = st.text_input("Full text", value="", max_chars=None, key=None, type="default", help=None, autocomplete=None,
+                      on_change=None,label_visibility="visible")
 
         text_find = st.text_input("Text you want to find", value="", max_chars=None, key=None, type="default", help=None, autocomplete=None,
-                      on_change=None, args=None, kwargs=None, *, placeholder=None, disabled=False,
-                      label_visibility="visible")
+                      on_change=None,label_visibility="visible")
 
-        text_replace = st.text_input("Text you want to replace the found text in the previous step", value="", max_chars=None, key=None, type="default", help=None, autocomplete=None,
-                      on_change=None, args=None, kwargs=None, *, placeholder=None, disabled=False,
-                      label_visibility="visible")
-
-        output=""
+        text_replace = st.text_input("Text you want to replace", value="", max_chars=None, key=None, type="default", help=None, autocomplete=None,
+                     on_change=None, label_visibility="visible")
 
         body = {
             "find": text_find,
@@ -38,10 +34,10 @@ def run():
             "body": text_body
         }
 
-        if st.button("Submit request"):
-            response_output = send_sqs_message([body])
-
-        st.success('The transformed text is {}'.format(response_output))
+        if text_replace and text_find and text_body:
+            if st.button("Submit request"):
+                response_output = send_sqs_message([body])
+                st.success('The transformed text is {}'.format(response_output))
 
     if add_selectbox == 'Batch':
 

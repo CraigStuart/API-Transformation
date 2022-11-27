@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="324bdb0d-46e0-4c12-a64b-4bf3f5b90a74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/deloitte-logo-black.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/deloitte-logo-white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospital.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/insurance.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/producer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastructure/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastructure/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/streamlit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/streamlit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/producer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../terraform/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../terraform/.tfm.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../terraform/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../terraform/main.tf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../terraform/terraform/enviroments/api-transformation/create-lb/services.tfvars" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,15 +41,23 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/crastevenson/Documents/Work/IaC/API-Transformation/streamlit",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/Users/crastevenson/Documents/Work/IaC/API-Transformation/infrastructure/enviroments/modules/setup",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/../infrastructure/enviroments/modules/setup" />
+      <recent name="$PROJECT_DIR$/../infrastructure/enviroments/setup" />
+      <recent name="$PROJECT_DIR$/../infrastructure/enviroments/streamlit-app" />
+      <recent name="$PROJECT_DIR$/../infrastructure/enviroments/modules/lb" />
+      <recent name="$PROJECT_DIR$/../infrastructure/enviroments/modules/ecs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../infrastructure/enviroments" />
+      <recent name="$PROJECT_DIR$/../infrastructure" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -63,16 +73,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app.py</url>
-          <line>45</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

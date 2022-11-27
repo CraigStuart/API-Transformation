@@ -1,9 +1,13 @@
 import boto3
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 bootstrap_sqs = os.getenv("SQS_QUEUE_URL")
 
 # Create SQS client
-sqs = boto3.client(bootstrap_sqs)
+sqs = boto3.client("sqs")
 
 def send_sqs_message(body):
 
