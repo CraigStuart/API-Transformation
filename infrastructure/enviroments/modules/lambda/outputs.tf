@@ -1,9 +1,9 @@
-output "aws_ecr_name" {
-  value       = aws_ecr_repository.ecr_registry.name
-  description = "Name of ECR"
+output "aws_lambda_role" {
+  value       = aws_iam_role.iam_for_lambda.arn
+  description = "Name of Lambda role"
 }
 
-output "aws_ecr_repo_url" {
-  value       = aws_ecr_repository.ecr_registry.repository_url
-  description = "Name of ECR"
+output "aws_lambda_function" {
+  value       = aws_lambda_function.lambda_function.arn
+  description = "Lambda function arn"
 }

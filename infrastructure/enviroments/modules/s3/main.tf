@@ -1,8 +1,13 @@
-resource "aws_ecr_repository" "ecr_registry" {
-  name                 = "streamlit-fe"
-  image_tag_mutability = "MUTABLE"
+resource "aws_s3_bucket" "default" {
+  bucket       = "api-transformation-packages"
+}
 
-  image_scanning_configuration {
-    scan_on_push = true
+resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
+  bucket = aws_s3_bucket.default.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
   }
 }

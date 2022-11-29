@@ -1,3 +1,8 @@
+# Import modules
+module "iam_ecs_role" {
+  source = "../iam"
+}
+
 #ECS Cluster
 resource "aws_ecs_cluster" "streamlit" {
   name = "streamlit-fe-prod"
@@ -73,27 +78,28 @@ resource "aws_ecs_task_definition" "ecs_task_def_service" {
   ])
     }
 
-#ECS run task
-resource "aws_ecs_service" "task" {
-  name            = "streamlit-fe"
-  cluster         = aws_ecs_cluster.streamlit.id
-  task_definition = aws_ecs_task_definition.ecs_task_def_service.arn
-  desired_count   = 2
-  iam_role        = "arn:aws:iam::008587414280:role/ecs_task_execution_role"
-
-  ordered_placement_strategy {
-    type  = "binpack"
-    field = "cpu"
-  }
-
-  load_balancer {
-    target_group_arn = aws_lb_target_group.foo.arn
-    container_name   = "mongo"
-    container_port   = 8080
-  }
-
-  placement_constraints {
-    type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in [us-west-2a, us-west-2b]"
-  }
-}
+#
+###ECS service
+#resource "aws_ecs_service" "task" {
+#  name            = "streamlit-fe-svc"
+#  cluster         = aws_ecs_cluster.streamlit.id
+#  task_definition = aws_ecs_task_definition.ecs_task_def_service.arn
+#  desired_count   = 1
+#  iam_role        = module.iam_ecs_role.aws_ecs_role_name
+#
+#  ordered_placement_strategy {
+#    type  = "binpack"
+#    field = "cpu"
+#  }
+#
+#  load_balancer {
+#    target_group_arn = aws_lb_target_group.foo.arn
+#    container_name   = "mongo"
+#    container_port   = 8080
+#  }
+#
+#  placement_constraints {
+#    type       = "memberOf"
+#    expression = "attribute:ecs.availability-zone in [us-west-2a, us-west-2b]"
+#  }
+#}
