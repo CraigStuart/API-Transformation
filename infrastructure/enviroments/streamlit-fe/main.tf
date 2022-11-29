@@ -10,20 +10,28 @@ module "ecr" {
   source = "../modules/ecr"
 }
 
-module "ecs" {
-  source = "../modules/ecs"
-}
-
 module "iam" {
   source = "../modules/iam"
 }
 
-module "lambda" {
-  source = "../modules/lambda"
-}
+#module "ecs" {
+#  source = "../modules/ecs"
+#}
+#
+#module "lambda" {
+#  source = "../modules/lambda"
+#}
 
 module "s3" {
   source = "../modules/s3"
+}
+
+module "vpc" {
+  source = "../modules/vpc"
+}
+
+module "sg" {
+  source = "../modules/sg"
 }
 
 #module "app" {
@@ -39,8 +47,8 @@ module "s3" {
 #  prefix = var.prefix
 #}
 #
-#module "lb" {
-#  source = "../../modules/lb"
+#module "vpc" {
+#  source = "../../modules/vpc"
 #
 #  prefix = var.prefix
 #}
