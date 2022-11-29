@@ -1,3 +1,24 @@
+module "vpc" {
+  source = "../modules/vpc"
+}
+
+module "sg" {
+  source = "../modules/sg"
+  vpc_id = module.vpc.vpc_id
+}
+
+module "lb" {
+  source                 = "../modules/lb"
+  vpc_public_subnets_id  = module.vpc.vpc_public_subnets_id
+  vpc_private_subnets_id = module.vpc.vpc_private_subnets_id
+  vpc_id                 = module.vpc.vpc_id
+  alb_sg_id              = module.sg.alb_sg_id
+}
+
+module "s3" {
+  source = "../modules/s3"
+}
+
 module "queue_sqs" {
   source = "../modules/queue"
 }
@@ -24,18 +45,6 @@ module "lambda" {
   source = "../modules/lambda"
   lambda_role = module.iam.aws_lambda_role_name
   sqs_arn = module.queue_sqs.aws_sqs_text_transformation_arn
-}
-
-module "s3" {
-  source = "../modules/s3"
-}
-
-module "vpc" {
-  source = "../modules/vpc"
-}
-
-module "sg" {
-  source = "../modules/sg"
 }
 
 #module "app" {

@@ -1,11 +1,7 @@
-module "vpc_id" {
-  source = "../vpc"
-}
-
 #Create a security group for the ALB
 resource "aws_security_group" "sg_alb" {
   name        = "api-stream-alb-security-group"
-  vpc_id      = module.vpc_id.vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     protocol    = "tcp"
