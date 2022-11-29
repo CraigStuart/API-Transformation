@@ -23,4 +23,3 @@ variable "alb_sg_id" {
   type        = string
   description = "Alb sg id"
 }
-

@@ -7,3 +7,8 @@ output "alb_sg_id" {
   value       = aws_security_group.sg_alb.id
   description = "Sg alb id"
 }
+
+output "ecs_sg_id" {
+  value       = aws_security_group.sg_ecs.id
+  description = "Sg alb id"
+}

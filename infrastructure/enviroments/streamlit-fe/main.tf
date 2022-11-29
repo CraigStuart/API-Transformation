@@ -36,9 +36,13 @@ module "iam" {
 }
 
 module "ecs" {
-  source   = "../modules/ecs"
-  ecs_role = module.iam.aws_ecs_role_name
-  ecr_url  = module.ecr.aws_ecr_repo_url
+  source                 = "../modules/ecs"
+  ecs_role               = module.iam.aws_ecs_role_name
+  ecr_url                = module.ecr.aws_ecr_repo_url
+  ecs_sg_id              = module.sg.ecs_sg_id
+  vpc_private_subnets_id = module.vpc.vpc_private_subnets_id
+  alb_tg_id              = module.lb.alb_tg_id
+  aws_bucket_variables   = module.s3.aws_bucket_variables
 }
 
 module "lambda" {
