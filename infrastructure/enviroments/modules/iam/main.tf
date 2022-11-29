@@ -24,6 +24,35 @@ resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attach
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+# Create a policy in order for ECS executor rule to pull in environmental variables
+resource "aws_iam_policy" "policy" {
+  name        = "s3-access-policy"
+  description = "A s3 access policy"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": ["arn:aws:s3:::api-transformation-variables*", "arn:aws:s3:::api-transformation-variables"]
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "s3-access-ecs-executor" {
+  policy_arn = aws_iam_policy.policy.arn
+  role = aws_iam_role.ecs_role.name
+}
+
+#todo remove hard-coding
+
 # Create a role for lambda execution
 # Create lambda role and permissions to SQS
 resource "aws_iam_role" "lambda_role" {

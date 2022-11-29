@@ -1,14 +1,3 @@
-## Import modules
-#module "lambda" {
-#  source = "../iam"
-#}
-#
-## Import SQS parameters
-#module "sqs" {
-#  source = "../queue"
-#}
-
-# Setup Lambda function
 resource "aws_lambda_function" "lambda_function" {
 
   function_name    = "api-transformation-prod"
