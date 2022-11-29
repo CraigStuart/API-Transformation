@@ -23,5 +23,10 @@ provider "aws" {
   allowed_account_ids = [var.aws_account_id]
   region              = "eu-central-1"
 
+  default_tags {
+    tags = {
+      Name = "api-stream"
+    }
+  }
 }
 
