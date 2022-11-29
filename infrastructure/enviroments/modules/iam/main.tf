@@ -24,9 +24,7 @@ resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attach
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-
 # Create a role for lambda execution
-
 # Create lambda role and permissions to SQS
 resource "aws_iam_role" "lambda_role" {
   name = "lambda-execution-role"
@@ -73,7 +71,7 @@ data "aws_iam_policy_document" "default" {
   statement {
     sid       = "AllowInvokingLambdas"
     effect    = "Allow"
-    resources = ["arn:aws:lambda:ap-southeast-1:*:function:*"]
+    resources = ["arn:aws:lambda:eu-cenral-1:*:function:*"]
     actions   = ["lambda:InvokeFunction"]
   }
 
@@ -86,7 +84,7 @@ data "aws_iam_policy_document" "default" {
   statement {
     sid       = "AllowWritingLogs"
     effect    = "Allow"
-    resources = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/lambda/*:*"]
+    resources = ["arn:aws:logs:eu-central-1:*:log-group:/aws/lambda/*:*"]
 
     actions = [
       "logs:CreateLogStream",

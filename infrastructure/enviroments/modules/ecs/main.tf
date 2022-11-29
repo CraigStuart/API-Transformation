@@ -1,8 +1,3 @@
-# Import modules
-module "iam_ecs_role" {
-  source = "../iam"
-}
-
 #ECS Cluster
 resource "aws_ecs_cluster" "streamlit" {
   name = "streamlit-fe-prod"
@@ -54,18 +49,18 @@ resource "aws_ecs_cluster_capacity_providers" "ecs_providers" {
 #ECS task definition
 resource "aws_ecs_task_definition" "ecs_task_def_service" {
 
-  family = "service"
+  family = "ecs_service"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu       = 256
   memory    = 512
-  task_role_arn = "arn:aws:iam::008587414280:role/ecs_task_execution_role" #todo remove hardcoding
-  execution_role_arn = "arn:aws:iam::008587414280:role/ecs_task_execution_role" #todo remove hardcoding
+  task_role_arn = var.ecs_role
+  execution_role_arn = var.ecs_role
 
   container_definitions = jsonencode([
     {
       name      = "streamlit-app-prod"
-      image     = "008587414280.dkr.ecr.eu-central-1.amazonaws.com/streamlit-fe:latest"
+      image     = "${var.ecr_url}:latest"
       essential = true
       operating_system_family  = "linux"
       portMappings = [
