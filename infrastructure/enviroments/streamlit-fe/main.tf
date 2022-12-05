@@ -19,9 +19,14 @@ module "s3" {
   source = "../modules/s3"
 }
 
-module "queue_sqs" {
-  source = "../modules/queue"
-}
+#module "queue_sqs" {
+#  source = "../modules/queue"
+#}
+
+#
+#module "msk" {
+#  source = "../modules/msk"
+#}
 
 module "setup" {
   source = "../modules/setup"
@@ -48,7 +53,6 @@ module "ecs" {
 module "lambda" {
   source = "../modules/lambda"
   lambda_role = module.iam.aws_lambda_role_name
-  sqs_arn = module.queue_sqs.aws_sqs_text_transformation_arn
 }
 
 #module "app" {

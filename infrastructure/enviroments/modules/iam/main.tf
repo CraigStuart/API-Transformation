@@ -36,9 +36,8 @@ resource "aws_iam_policy" "policy" {
         {
             "Effect": "Allow",
             "Action": [
-                "s3:Get*",
-                "s3:List*"
-            ],
+                "s3:*"
+                ],
             "Resource": ["arn:aws:s3:::api-transformation-variables*", "arn:aws:s3:::api-transformation-variables"]
         }
     ]
@@ -49,6 +48,27 @@ EOF
 resource "aws_iam_role_policy_attachment" "s3-access-ecs-executor" {
   policy_arn = aws_iam_policy.policy.arn
   role = aws_iam_role.ecs_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "kafka-access-ecs-executor" {
+  policy_arn = aws_iam_policy.kafka.arn
+  role = aws_iam_role.ecs_role.name
+}
+
+resource "aws_iam_policy" "kafka" {
+  policy = data.aws_iam_policy_document.kafka.json
+}
+
+data "aws_iam_policy_document" "kafka" {
+
+  statement {
+    sid       = "AllowKafkaPermissions"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = [
+      "kafka:*"
+    ]
+  }
 }
 
 #todo remove hard-coding
@@ -79,21 +99,19 @@ resource "aws_iam_role_policy_attachment" "default" {
   role = aws_iam_role.lambda_role.name
 }
 
+
 resource "aws_iam_policy" "default" {
   policy = data.aws_iam_policy_document.default.json
 }
 
 data "aws_iam_policy_document" "default" {
-  statement {
-    sid       = "AllowSQSPermissions"
-    effect    = "Allow"
-    resources = ["arn:aws:sqs:*"]
 
+  statement {
+    sid       = "AllowKafkaPermissions"
+    effect    = "Allow"
+    resources = ["*"]
     actions = [
-      "sqs:ChangeMessageVisibility",
-      "sqs:DeleteMessage",
-      "sqs:GetQueueAttributes",
-      "sqs:ReceiveMessage",
+      "kafka:*"
     ]
   }
 
@@ -120,5 +138,12 @@ data "aws_iam_policy_document" "default" {
       "logs:PutLogEvents",
     ]
   }
+  statement {
+    sid       = "AllowKmsDecrytion"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["kms:Decrypt"]
+  }
 }
+
 

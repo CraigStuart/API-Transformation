@@ -9,7 +9,8 @@ variable "lambda_role" {
   description = "lambda role"
 }
 
-variable "sqs_arn" {
-  type        = string
-  description = "SQS Arn"
+variable "kafka_url" {
+  type = string
+  description = "Kafka broker URL"
+  default = "z-2.streamlittest.yqgpyq.c8.kafka.eu-central-1.amazonaws.com:2181,z-3.streamlittest.yqgpyq.c8.kafka.eu-central-1.amazonaws.com:2181,z-1.streamlittest.yqgpyq.c8.kafka.eu-central-1.amazonaws.com:2181"
 }
