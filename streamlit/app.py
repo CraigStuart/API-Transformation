@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
-from src.config.sqs_execution import sqs_main
+from src.config.main_execution import main
+from src.config.client_config import config
 
 def run():
 
@@ -23,14 +24,14 @@ def run():
     body = {
         "find": str(text_find),
         "replace": str(text_replace),
-        "body": str(text_body)
+        "body": str(text_body),
+        "client_id": str(config['client_id'])
     }
 
     if text_replace and text_find and text_body:
         if st.button("Submit request"):
-            response = sqs_main(body)
+            response = main(body, client_id=config['client_id'])
             st.success('The transformed text is {}'.format(response))
-
             st.text_area(label="Results:", value=response)
 
 if __name__ == '__main__':

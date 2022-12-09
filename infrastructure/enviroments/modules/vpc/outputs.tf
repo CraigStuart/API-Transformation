@@ -13,3 +13,7 @@ output "vpc_private_subnets_id" {
   description = "VPC private subnet ID"
 }
 
+output "vpc_cidr_blocks" {
+  value       = aws_vpc.default.*.cidr_block
+  description = "VPC private subnet ID"
+}

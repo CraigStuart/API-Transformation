@@ -28,6 +28,7 @@ PRODUCER_CONFIG = {
     'acks': 'all',
     # 'retries': 2147483647,
     'max.in.flight.requests.per.connection': 5,
+    'max.request.size': 10048576,
     # Create high throughput producer
     'compression.type': 'snappy',
     'linger.ms': 20,
@@ -57,13 +58,13 @@ class ProducerMessage:
         print("Message sent: {}".format(self.topic))
         print("=====================================================================")
 
-
 def lambda_handler():
 
     consumer = Consumer(CONSUMER_CONFIG)
     consumer.subscribe(['streamlit-response'])
 
     while True:
+
         message = consumer.poll(1.0)
         if message is None:
             continue
@@ -90,7 +91,3 @@ def transformation(body) -> dict:
     body_updated = re.sub(str(body["find"]), str(body["replace"]), body["body"])
 
     return body_updated
-
-
-if __name__ == '__main__':
-    lambda_handler()

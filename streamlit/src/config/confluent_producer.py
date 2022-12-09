@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 import pandas as pd
 from confluent_kafka import Producer
 from json import dumps, loads
-from src.config.client_config import client_config
 
 load_dotenv()
 
@@ -20,7 +19,7 @@ PRODUCER_CONFIG = {
     'compression.type': 'snappy',
     'linger.ms': 20,
     'batch.size': 32 * 1024,
-    'client.id': client_config['client.id']
+    'message.max.bytes': 10000000
 }
 
 """The Kafka producer configuration parameters for additional security (`dict`).

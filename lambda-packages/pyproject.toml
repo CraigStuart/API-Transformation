@@ -6,10 +6,11 @@ authors = ["Craig  <craigstuart@icloud.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.9.7"
+python = "~3.9"
 python-dotenv = "^0.21.0"
 confluent-kafka = "^1.9.2"
 regex = "^2022.10.31"
+pandas = "^1.5.2"
 
 [build-system]
 requires = ["poetry-core"]

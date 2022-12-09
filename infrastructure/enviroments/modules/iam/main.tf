@@ -66,7 +66,24 @@ data "aws_iam_policy_document" "kafka" {
     effect    = "Allow"
     resources = ["*"]
     actions   = [
-      "kafka:*"
+      "kafka:*",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeRouteTables",
+      "ec2:DescribeVpcEndpoints",
+      "ec2:DescribeVpcAttribute",
+      "kms:DescribeKey",
+      "kms:CreateGrant",
+      "logs:CreateLogDelivery",
+      "logs:GetLogDelivery",
+      "logs:UpdateLogDelivery",
+      "logs:DeleteLogDelivery",
+      "logs:ListLogDeliveries",
+      "logs:PutResourcePolicy",
+      "logs:DescribeResourcePolicies",
+      "logs:DescribeLogGroups",
+      "S3:GetBucketPolicy",
     ]
   }
 }
@@ -99,21 +116,18 @@ resource "aws_iam_role_policy_attachment" "default" {
   role = aws_iam_role.lambda_role.name
 }
 
+#Add MSK/kafka permissisons to lambda execution role
+resource "aws_iam_role_policy_attachment" "kafka-access-lambda-executor" {
+  policy_arn = aws_iam_policy.kafka.arn
+  role = aws_iam_role.lambda_role.name
+}
 
+#Add general lambda policy to lambda role
 resource "aws_iam_policy" "default" {
   policy = data.aws_iam_policy_document.default.json
 }
 
 data "aws_iam_policy_document" "default" {
-
-  statement {
-    sid       = "AllowKafkaPermissions"
-    effect    = "Allow"
-    resources = ["*"]
-    actions = [
-      "kafka:*"
-    ]
-  }
 
   statement {
     sid       = "AllowInvokingLambdas"

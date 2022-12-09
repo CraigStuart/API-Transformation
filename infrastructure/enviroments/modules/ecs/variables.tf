@@ -3,6 +3,24 @@ variable "ecs_role" {
   description = "ecs role"
 }
 
+variable "region" {
+  type = string
+  default = "eu-central-1"
+  description = "default region"
+}
+
+variable "log_group_ecs_containers" {
+  type = string
+  default = "ecs_container_logs_group"
+  description = "ECS container log group"
+}
+
+variable "log_group_ecs_cluster" {
+  type = string
+  default = "ecs_cluster_logs_group"
+  description = "ECS cluster log group"
+}
+
 variable "ecr_url" {
   type = string
   description = "ecr url"

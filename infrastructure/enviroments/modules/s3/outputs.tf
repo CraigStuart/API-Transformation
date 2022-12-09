@@ -8,3 +8,9 @@ output "aws_bucket_variables" {
   description = "Name of streamlit fe variables S3 bucket"
 }
 
+output "aws_bucket_mks_logs" {
+  value       = aws_s3_bucket.msk_logs.id
+  description = "Name of streamlit msk logs S3 bucket"
+}
+
+

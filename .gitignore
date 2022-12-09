@@ -192,3 +192,6 @@ terraform.rc
 #/infrastructure/enviroments/streamlit-fe/*
 /infrastructure/credentials
 ../../credentials
+
+.venv
+./lambda-packages/api-transformation/python/*

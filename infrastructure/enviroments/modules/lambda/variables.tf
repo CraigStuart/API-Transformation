@@ -9,8 +9,12 @@ variable "lambda_role" {
   description = "lambda role"
 }
 
-variable "kafka_url" {
+variable "lambda_ecr_url" {
+  type = string
+  description = "lambda ecr url"
+}
+
+variable "bootstrap_brokers_tls" {
   type = string
   description = "Kafka broker URL"
-  default = "z-2.streamlittest.yqgpyq.c8.kafka.eu-central-1.amazonaws.com:2181,z-3.streamlittest.yqgpyq.c8.kafka.eu-central-1.amazonaws.com:2181,z-1.streamlittest.yqgpyq.c8.kafka.eu-central-1.amazonaws.com:2181"
 }

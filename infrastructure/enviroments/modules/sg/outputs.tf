@@ -12,3 +12,8 @@ output "ecs_sg_id" {
   value       = aws_security_group.sg_ecs.id
   description = "Sg alb id"
 }
+
+output "msk_sg_id" {
+  value       = aws_security_group.sg_msk.id
+  description = "Sg mks id"
+}

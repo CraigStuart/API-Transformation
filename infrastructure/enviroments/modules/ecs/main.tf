@@ -1,3 +1,19 @@
+#setup kms key
+resource "aws_kms_key" "ecs_logs" {
+  description             = "ecs_logs"
+  deletion_window_in_days = 7
+}
+
+#Configure cloud watch group
+resource "aws_cloudwatch_log_group" "ecs_logs_group" {
+  name = var.log_group_ecs_cluster
+}
+
+#Configure cloud watch group
+resource "aws_cloudwatch_log_group" "ecs_logs_group_containers" {
+  name = var.log_group_ecs_containers
+}
+
 #ECS Cluster
 resource "aws_ecs_cluster" "streamlit" {
   name = "streamlit-fe-prod"
@@ -6,6 +22,19 @@ resource "aws_ecs_cluster" "streamlit" {
     name  = "containerInsights"
     value = "enabled"
   }
+
+  configuration {
+    execute_command_configuration {
+      kms_key_id = aws_kms_key.ecs_logs.arn
+      logging    = "OVERRIDE"
+
+      log_configuration {
+        cloud_watch_encryption_enabled = true
+        cloud_watch_log_group_name     = aws_cloudwatch_log_group.ecs_logs_group.name
+      }
+    }
+  }
+
 }
 
 resource "aws_ecs_cluster_capacity_providers" "ecs_providers" {
@@ -47,7 +76,14 @@ resource "aws_ecs_task_definition" "ecs_task_def_service" {
           hostPort      = 8501
         }
       ]
-
+      logConfiguration = {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": var.log_group_ecs_containers,
+          "awslogs-region": var.region,
+          "awslogs-stream-prefix": "streaming"
+        }
+      }
     }
   ])
 }

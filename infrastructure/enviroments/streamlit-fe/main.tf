@@ -3,8 +3,8 @@ module "vpc" {
 }
 
 module "sg" {
-  source = "../modules/sg"
-  vpc_id = module.vpc.vpc_id
+  source   = "../modules/sg"
+  vpc_id   = module.vpc.vpc_id
 }
 
 module "lb" {
@@ -18,15 +18,6 @@ module "lb" {
 module "s3" {
   source = "../modules/s3"
 }
-
-#module "queue_sqs" {
-#  source = "../modules/queue"
-#}
-
-#
-#module "msk" {
-#  source = "../modules/msk"
-#}
 
 module "setup" {
   source = "../modules/setup"
@@ -51,26 +42,16 @@ module "ecs" {
 }
 
 module "lambda" {
-  source = "../modules/lambda"
-  lambda_role = module.iam.aws_lambda_role_name
+  source                = "../modules/lambda"
+  lambda_role           = module.iam.aws_lambda_role_name
+  lambda_ecr_url        = module.ecr.aws_ecr_repo_url_lambda
+  bootstrap_brokers_tls = module.msk.bootstrap_brokers_tls
 }
 
-#module "app" {
-#  source = "../../modules/app"
-#
-#  environment = var.environment
-#  prefix      = var.prefix
-#}
+module "msk" {
+  source                    = "../modules/msk"
+  vpc_private_subnets_id    = module.vpc.vpc_private_subnets_id
+  s3_msk_bucket             = module.s3.aws_bucket_mks_logs
+  sg_msk                    = module.sg.msk_sg_id
+}
 
-#module "ecs" {
-#  source = "../../modules/ecs"
-#
-#  prefix = var.prefix
-#}
-#
-#module "vpc" {
-#  source = "../../modules/vpc"
-#
-#  prefix = var.prefix
-#}
-#
